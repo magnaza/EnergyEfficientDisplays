@@ -1,7 +1,8 @@
 classdef UtilityFunctions
     methods
         
-        function out = distortion(obj, imageA,imageB)
+        
+        function out = distortion(obj, imageA, imageB)
 
             A_lab = rgb2lab(imageA);
             B_lab = rgb2lab(imageB);
@@ -39,6 +40,21 @@ classdef UtilityFunctions
             I = Ri + Gi + Bi;
 
             out = sum(sum(I));
+        end
+
+        function out = distortion_fede(obj, A, B)
+            A_lab = rgb2lab(A);
+            B_lab = rgb2lab(B);
+
+            C = A_lab - B_lab;
+            C = double(C).^2;
+            out = sum(sum(sum(C)));
+            out = sqrt(out);
+            [W, H, Z] = size(A_lab);
+            M = 100^2 + 255^2 + 255^2;
+            M = sqrt(M);
+            DEN = W * H * M;
+            out = out / DEN * 100;
         end
     end
 end
