@@ -13,9 +13,9 @@ for x = 0:5:40
     v = [v; {D, P2}];
     %figure, imshow(B);
 end
-table1=array2table(v);
+tableBlue=array2table(v, 'VariableNames',{'x','y'});
 hold on;
-plot(table1.v1, table1.v2);
+plot(tableBlue.x, tableBlue.y);
 title('BlueDistortion');
 xlabel('Distortion'); 
 ylabel('PowerSaving');
