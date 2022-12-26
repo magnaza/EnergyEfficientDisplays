@@ -11,7 +11,7 @@ for x = 0:5:40
     P2 = UtilityClass.getConsumption(B);
     fprintf('%f\n',P2);
     v = [v; {D, P2}];
-    %figure, imshow(B);
+    %figure, imshow(B)
 end
 v = cell2mat(v)
 tableBlue=array2table(v, 'VariableNames',{'x','y'});
