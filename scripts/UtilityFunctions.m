@@ -10,8 +10,8 @@ classdef UtilityFunctions
             s = size(imageA);
             w = s(1);
             h = s(2);
-            %diff = sum(sum(sqrt((A_lab(:, :, 1)-B_lab(:, :, 1))^2 + (A_lab(:, :, 2)-B_lab(:, :, 2))^2 + (A_lab(:, :, 3)-B_lab(:, :, 3))^2)));
-            diff = sqrt(sum(sum(sum((A_lab(:, :, 1)-B_lab(:, :, 1))^2 + (A_lab(:, :, 2)-B_lab(:, :, 2))^2 + (A_lab(:, :, 3)-B_lab(:, :, 3))^2))));
+            diff = sum(sum(sqrt((A_lab(:, :, 1)-B_lab(:, :, 1)).^2 + (A_lab(:, :, 2)-B_lab(:, :, 2)).^2 + (A_lab(:, :, 3)-B_lab(:, :, 3)).^2)));
+            %diff = sqrt(sum(sum(sum((A_lab(:, :, 1)-B_lab(:, :, 1)).^2 + (A_lab(:, :, 2)-B_lab(:, :, 2)).^2 + (A_lab(:, :, 3)-B_lab(:, :, 3)).^2))));
             out = 100 * (diff)/(w * h * sqrt(100^2 + 255^2 + 255^2));
 
         end

@@ -1,4 +1,4 @@
-A = imread('../images/4.1.01.tiff');
+A = imread('images/4.1.01.tiff');
 %imshow(A);
 UtilityClass = UtilityFunctions;
 TransformationsClass = Transformations;
@@ -13,9 +13,10 @@ for x = 0:5:40
     v = [v; {D, P2}];
     %figure, imshow(B);
 end
+v = cell2mat(v)
 tableBlue=array2table(v, 'VariableNames',{'x','y'});
 hold on;
-plot(tableBlue.x, tableBlue.y);
+plot(tableBlue.x, tableBlue.y, "-b")
 title('BlueDistortion');
 xlabel('Distortion'); 
 ylabel('PowerSaving');
