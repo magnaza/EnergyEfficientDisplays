@@ -17,7 +17,7 @@ classdef blueDistortionAnalysis
 
 
             filename = '../images/4.1.01.tiff'
-            for y = 1:1:3
+            for y = 1:1:7
                 str = string(y);
                 filename = replaceBetween(filename, '4.1.0', '.tiff', str)
                 A = imread(filename);
@@ -25,7 +25,7 @@ classdef blueDistortionAnalysis
                 P1 = UtilityClass.getConsumption(A);
     %fprintf('initial PC:%f\n', P1);
                 v = [];
-                for x = 1:2:10
+                for x = 1:2:30
                     B = TransformationsClass.blue_distortion(A, x);
                     D = UtilityClass.distortion(B, A);
                     P2 = UtilityClass.getConsumption(B);
@@ -54,7 +54,7 @@ classdef blueDistortionAnalysis
 
 
             filename = '../images/4.2.01.tiff'
-            for y = 1:1:3
+            for y = 1:1:7
                 str = string(y);
                 filename = replaceBetween(filename, '4.2.0', '.tiff', str)
                 A = imread(filename);
@@ -62,7 +62,7 @@ classdef blueDistortionAnalysis
                 P1 = UtilityClass.getConsumption(A);
     %fprintf('initial PC:%f\n', P1);
                 v = [];
-                for x = 1:2:10
+                for x = 1:2:30
                     B = TransformationsClass.blue_distortion(A, x);
                     D = UtilityClass.distortion(B, A);
                     P2 = UtilityClass.getConsumption(B);
@@ -83,6 +83,7 @@ classdef blueDistortionAnalysis
                 legend('bluDistortion');
                 finalVector = [finalVector; {v}]
             end
+            hold off
             out = finalVector;
         end
     end

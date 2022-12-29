@@ -79,7 +79,7 @@ classdef histogramEqualizationAnalysis
                 title('histogramEqualization');
                 xlabel('Distortion'); 
                 ylabel('PowerSaving');
-                legend('histogram equalization');
+                legend('blueDistortion', 'histogram equalization');
                 finalVector = [finalVector; {v}]
             end
             out = finalVector;
