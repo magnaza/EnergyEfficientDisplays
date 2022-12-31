@@ -17,6 +17,7 @@ classdef blueDistortionAnalysis
 
 
             filename = '../images/4.1.01.tiff'
+            figure
             for y = 1:1:7
                 str = string(y);
                 filename = replaceBetween(filename, '4.1.0', '.tiff', str)

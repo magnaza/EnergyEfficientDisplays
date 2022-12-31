@@ -17,6 +17,7 @@ classdef histogramEqualizationAnalysis
 
 
             filename = '../images/4.1.01.tiff'
+            figure
             for y = 1:1:7
                 str = string(y);
                 filename = replaceBetween(filename, '4.1.0', '.tiff', str)
@@ -38,6 +39,7 @@ classdef histogramEqualizationAnalysis
                 end
                 v = cell2mat(v)
                 tableBlue=array2table(v, 'VariableNames',{'x','y','z'});
+                
                 hold on;
                 plot(tableBlue.x, tableBlue.y, "-b")
                 title('histogramEqualization');
@@ -74,6 +76,7 @@ classdef histogramEqualizationAnalysis
                 end
                 v = cell2mat(v)
                 tableBlue=array2table(v, 'VariableNames',{'x','y','z'});
+
                 hold on;
                 plot(tableBlue.x, tableBlue.y, "-r")
                 title('histogramEqualization');
