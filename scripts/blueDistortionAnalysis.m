@@ -7,6 +7,8 @@ classdef blueDistortionAnalysis
         function out = f1(obj)
             limit = 3;
             finalVector = [];
+            finalVector1 = [];
+            finalVector2 = [];
             UtilityClass = UtilityFunctions;
             TransformationsClass = Transformations;
 
@@ -26,15 +28,15 @@ classdef blueDistortionAnalysis
                 P1 = UtilityClass.getConsumption(A);
     %fprintf('initial PC:%f\n', P1);
                 v = [];
-                for x = 1:2:30
+                for x = 0:2:30
                     B = TransformationsClass.blue_distortion(A, x);
                     D = UtilityClass.distortion(B, A);
                     P2 = UtilityClass.getConsumption(B);
                     PS = (P1 - P2)/P2 * 100;
         %fprintf('%f\n',PS);
-                    if D <= 3.00
+                    %if D <= 3.00
                         v = [v; {D, PS, y}];
-                    end
+                    %end
     %figure, imshow(B)
                 end
                 v = cell2mat(v)
@@ -45,7 +47,7 @@ classdef blueDistortionAnalysis
                 xlabel('Distortion'); 
                 ylabel('PowerSaving');
                 legend('bluDistortion');
-                finalVector = [finalVector; {v}]
+                finalVector1 = [finalVector1; {v}]
             end
 
 
@@ -63,15 +65,15 @@ classdef blueDistortionAnalysis
                 P1 = UtilityClass.getConsumption(A);
     %fprintf('initial PC:%f\n', P1);
                 v = [];
-                for x = 1:2:30
+                for x = 0:2:30
                     B = TransformationsClass.blue_distortion(A, x);
                     D = UtilityClass.distortion(B, A);
                     P2 = UtilityClass.getConsumption(B);
                     PS = (P1 - P2)/P2 * 100;
         %fprintf('%f\n',PS);
-                    if D <= 3.00
+                    %if D <= 3.00
                         v = [v; {D, PS}, y];
-                    end
+                    %end
     %figure, imshow(B)
                 end
                 v = cell2mat(v)
@@ -82,9 +84,10 @@ classdef blueDistortionAnalysis
                 xlabel('Distortion'); 
                 ylabel('PowerSaving');
                 legend('bluDistortion');
-                finalVector = [finalVector; {v}]
+                finalVector2 = [finalVector2; {v}]
             end
             hold off
+            finalVector = [finalVector1; finalVector2];
             out = finalVector;
         end
     end

@@ -7,6 +7,8 @@ classdef histogramEqualizationAnalysis
         function out = f1(obj)
             limit = 3;
             finalVector = [];
+            finalVector1 = [];
+            finalVector2 = [];
             UtilityClass = UtilityFunctions;
             TransformationsClass = Transformations;
 
@@ -26,15 +28,15 @@ classdef histogramEqualizationAnalysis
                 P1 = UtilityClass.getConsumption(A);
     %fprintf('initial PC:%f\n', P1);
                 v = [];
-                for x = 1.1:0.1:2
+                for x = 1.00:0.05:1.75
                     B = TransformationsClass.histogram_equalization(A, x);
                     D = UtilityClass.distortion(B, A);
                     P2 = UtilityClass.getConsumption(B);
                     PS = (P1 - P2)/P2 * 100;
         %fprintf('%f\n',PS);
-                    if D <= 3.00
+                    %if D <= 3.00
                         v = [v; {D, PS, y}];
-                    end
+                    %end
     %figure, imshow(B)
                 end
                 v = cell2mat(v)
@@ -45,7 +47,7 @@ classdef histogramEqualizationAnalysis
                 title('histogramEqualization');
                 xlabel('Distortion'); 
                 ylabel('PowerSaving');
-                finalVector = [finalVector; {v}]
+                finalVector1 = [finalVector1; {v}]
             end
 
 
@@ -63,15 +65,15 @@ classdef histogramEqualizationAnalysis
                 P1 = UtilityClass.getConsumption(A);
     %fprintf('initial PC:%f\n', P1);
                 v = [];
-                for x = 1.1:0.1:2
+                for x = 1.00:0.05:1.75
                     B = TransformationsClass.histogram_equalization(A, x);
                     D = UtilityClass.distortion(B, A);
                     P2 = UtilityClass.getConsumption(B);
                     PS = (P1 - P2)/P2 * 100;
         %fprintf('%f\n',PS);
-                    if D <= 3.00
+                    %if D <= 3.00
                         v = [v; {D, PS}, y];
-                    end
+                    %end
     %figure, imshow(B)
                 end
                 v = cell2mat(v)
@@ -83,8 +85,9 @@ classdef histogramEqualizationAnalysis
                 xlabel('Distortion'); 
                 ylabel('PowerSaving');
                 legend('blueDistortion', 'histogram equalization');
-                finalVector = [finalVector; {v}]
+                finalVector2 = [finalVector2; {v}]
             end
+            finalVector = [finalVector1; finalVector2]
             out = finalVector;
         end
     end
