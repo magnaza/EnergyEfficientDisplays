@@ -1,0 +1,91 @@
+classdef DVC_utilities
+   methods     
+       
+        function out = cellPowerConsumption1(obj, pixel)
+            p1 = 4.251 * 10^(-5);
+            p2 = -3.029 * 10^(-4);
+            p3 = 3.024 * 10^(-5);
+            vdd = 15;
+            Drgb = sum(pixel);
+            I1 = (p1*vdd*Drgb)/255; 
+            I2 = (p2*Drgb)/255;
+            I3 = p3;
+            Icell = I1 + I2 + I3;
+            out = Icell;
+        end
+        
+        function out = cellCurrent(obj, Drgb)
+            p1 = 4.251 * 10^(-5);
+            p2 = -3.029 * 10^(-4);
+            p3 = 3.024 * 10^(-5);
+            vdd = 15;
+            I1 = [double(Drgb(1,1,1)), double(Drgb(1,1,2)), double(Drgb(1,1,3))];
+            I2 = I1;
+            I1 = I1 * p1;
+            I1 = I1*vdd;
+            I1 = I1/255;
+            I2 = I2*p2;
+            I2 = I2/255;
+            I3 = [p3, p3, p3];
+            Icell = I1 + I2 + I3;
+            out = Icell;
+        end
+
+        function out = totalPowerConsumption(obj, currentMatrix)
+            out = sum(sum(sum(currentMatrix)));
+        end
+
+        function out = createCurrentMatrix(obj, imageA)
+            totalPower = [];
+            p1 = 4.251 * 10^(-5);
+            p2 = -3.029 * 10^(-4);
+            p3 = 3.024 * 10^(-5);
+            vdd = 15;
+            [h, l, z] = size(imageA);
+            for y = 1:1:h
+                for x = 1:1:l
+                    I1 = [double(imageA(y,x,1)), double(imageA(y,x,2)), double(imageA(y,x,3))];
+                    I2 = I1;
+                    I1 = I1 * p1;
+                    I1 = I1*vdd;
+                    I1 = I1/255;
+                    I2 = I2*p2;
+                    I2 = I2/255;
+                    I3 = [p3, p3, p3];
+                    Icell = I1 + I2 + I3;
+                    totalPower(y, x, :) = Icell;
+                end
+            end
+            totalPower = totalPower * vdd;
+            out =  totalPower;
+        end
+
+
+
+        function out = displayed_image(obj, I_cell, Vdd, mode)
+
+            SATURATED = 1;
+            DISTORTED = 2;
+
+            p1 =   4.251e-05;
+            p2 =  -3.029e-04;
+            p3 =   3.024e-05;
+            Vdd_org = 15;
+
+            I_cell_max = (p1 * Vdd * 1) + (p2 * 1) + p3;
+            image_RGB_max = (I_cell_max - p3)/(p1*Vdd_org+p2) * 255;
+
+            out = round((I_cell - p3)/(p1*Vdd_org+p2) * 255);
+
+            if (mode == SATURATED)
+                out(find(I_cell > I_cell_max)) = image_RGB_max;
+
+            else if (mode == DISTORTED)
+                out(find(I_cell > I_cell_max)) ...
+                = round(255 - out(find(I_cell > I_cell_max)));
+                end
+            end
+        end
+    end
+end
+
