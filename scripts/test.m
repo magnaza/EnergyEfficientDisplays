@@ -6,7 +6,7 @@ PS = DVC_class.totalPowerConsumption(matrixCurrent);
 vdd = 10;
 SATURATED = 1;
 DISTORTED = 2;
-image_RGB_saturated = DVC_class.displayed_image(matrixCurrent, vdd, SATURATED); 
+image_RGB_saturated = displayed_image(matrixCurrent, vdd, SATURATED); 
 
 figure
 imshow(image_RGB_saturated/255);       % display saturated RGB image

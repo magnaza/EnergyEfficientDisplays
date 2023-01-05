@@ -57,7 +57,7 @@ classdef DVC_utilities
                 end
             end
             totalPower = totalPower * vdd;
-            out =  totalPower/10;
+            out =  totalPower;
         end
 
 
