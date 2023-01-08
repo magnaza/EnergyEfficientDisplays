@@ -32,7 +32,7 @@ classdef histogramEqualizationAnalysis
                     B = TransformationsClass.histogram_equalization(A, x);
                     D = UtilityClass.distortion(B, A);
                     P2 = UtilityClass.getConsumption(B);
-                    PS = (P1 - P2)/P2 * 100;
+                    PS = (P1 - P2)/P1 * 100;
         %fprintf('%f\n',PS);
                     %if D <= 3.00
                         v = [v; {D, PS, y}];
@@ -69,7 +69,7 @@ classdef histogramEqualizationAnalysis
                     B = TransformationsClass.histogram_equalization(A, x);
                     D = UtilityClass.distortion(B, A);
                     P2 = UtilityClass.getConsumption(B);
-                    PS = (P1 - P2)/P2 * 100;
+                    PS = (P1 - P2)/P1 * 100;
         %fprintf('%f\n',PS);
                     %if D <= 3.00
                         v = [v; {D, PS}, y];
